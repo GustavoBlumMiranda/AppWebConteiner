@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>FiltroConteiner</title>
+</h:head>
+<h:body>
+	<h:form>
+	<p:menubar>
+            <p:submenu label="Conteiners"  >
+                <p:menuitem value="Cadastrar"  action="#{conteinerFiltro.exibirCadastroConteiner()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{conteinerFiltro.exibirFiltroConteiner()}"/>
+            </p:submenu>
+            <p:submenu label="Movimentação"  >
+                <p:menuitem value="Cadastrar"  action="#{conteinerFiltro.exibirCadastroMovimentacao()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{conteinerFiltro.exibirFiltroMovimentacao()}"/>
+            </p:submenu>
+            </p:menubar>
+		<div>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Cliente:" />
+				<p:inputText type="text" class="input"
+					value="#{conteinerFiltro.conteiner.cliente}" />
+
+				<p:outputLabel value="Numero do Conteiner:" />
+				<p:inputText type="text" name="idLetras" class="input"
+					value="#{conteinerFiltro.conteiner.numero}" />
+
+
+				<p:outputLabel value="Tipo" />
+				<p:selectOneMenu id="tipoConteiner"
+					value="#{conteinerFiltro.conteiner.tipo}">
+					<f:selectItem itemLabel="" />
+					<f:selectItem itemLabel="20" itemValue="20" />
+					<f:selectItem itemLabel="40" itemValue="40" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Status" />
+				<p:selectOneMenu id="statusConteiner"
+					value="#{conteinerFiltro.conteiner.status}">
+					<f:selectItem itemLabel="" />
+					<f:selectItem itemLabel="cheio" itemValue="cheio" />
+					<f:selectItem itemLabel="vazio" itemValue="vazio" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Categoria" />
+				<p:selectOneMenu id="categoraConteiner"
+					value="#{conteinerFiltro.conteiner.categoria}">
+					<f:selectItem itemLabel="" />
+					<f:selectItem itemLabel="Importação" itemValue="importacao" />
+					<f:selectItem itemLabel="Exportação" itemValue="exportacao" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+
+		</div>
+		<p:spacer width="10" height="10" />
+		<div>
+		<p:commandButton value="Filtrar"
+			actionListener="#{conteinerFiltro.filtrar()}"
+			styleClass="ui-priority-primary" ajax="false" />
+		</div>
+		<p:spacer width="10" height="10" />
+		<p:panel id="painelTabelas" styleClass="filtroForm">
+
+			<p:dataTable id="tabela" var="conteiner" paginator="true" rows="20"
+				paginatorPosition="bottom" value="#{conteinerFiltro.listaConteiners}"
+				widgetVar="todosTable"
+				emptyMessage="Não foram encontrados conteiners para os parâmetros informados">
+
+
+				<p:column>
+					<f:facet name="header">
+						<p:outputLabel value="Cliente" />
+					</f:facet>
+					<h:outputText value="#{conteiner.cliente}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<p:outputLabel value="Numero" />
+					</f:facet>
+					<h:outputText value="#{conteiner.numero}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<p:outputLabel value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{conteiner.tipo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<p:outputLabel value="Status" />
+					</f:facet>
+					<h:outputText value="#{conteiner.status}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<p:outputLabel value="Categoria" />
+					</f:facet>
+					<h:outputText value="#{conteiner.categoria}" />
+				</p:column>
+				<p:column exportable="false" headerText="Opções">
+
+
+
+
+					<p:commandLink title="alterar" style="float: left"
+						action="#{conteinerFiltro.exibirAlteracaoConteiner()}"
+						styleClass="ui-icon ui-icon-pencil" >
+						<f:setPropertyActionListener
+							target="#{conteinerFiltro.conteinerSelecionado}"
+							value="#{conteiner}" />
+						<p:ajax event="dialogReturn"
+							listener="#{conteinerFiltro.atualizaResultadoConteiner}"
+							update="tabela" />
+					</p:commandLink>
+
+
+
+
+
+
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

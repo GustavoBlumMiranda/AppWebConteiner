@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>RelatorioMovimentacao</title>
+</h:head>
+<h:body>
+	<h:form>
+	<p:growl id="messages"/>
+
+        <p:menubar>
+            <p:submenu label="Conteiners"  >
+                <p:menuitem value="Cadastrar"  action="#{relatorioMovimentacao.exibirCadastroConteiner()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{relatorioMovimentacao.exibirFiltroConteiner()}"/>
+            </p:submenu>
+            <p:submenu label="Movimentação"  >
+                <p:menuitem value="Cadastrar"  action="#{relatorioMovimentacao.exibirCadastroMovimentacao()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{relatorioMovimentacao.exibirFiltroMovimentacao()}"/>
+            </p:submenu>
+            </p:menubar>
+		<p:spacer width="10" height="10" />
+			
+			<p:panel id="painelTabelas" styleClass="filtroForm">
+
+					<p:dataTable id="tabela" var="movimentacao" paginator="true" rows="20" paginatorPosition="bottom"  
+					value="#{relatorioMovimentacao.listaMovimentacao}" widgetVar="todosTable" emptyMessage="Não foram encontradas movimentações para os parâmetros informados">
+
+					
+						<p:column sortBy="#{movimentacao.conteiner.cliente}" >
+							<f:facet name="header"><p:outputLabel value="Cliente"/></f:facet>
+							<h:outputText value="#{movimentacao.conteiner.cliente}" />
+						</p:column>
+						<p:column sortBy="#{movimentacao.tipo}" >
+							<f:facet name="header"><p:outputLabel value="Tipo"/></f:facet>
+							<h:outputText value="#{movimentacao.tipo}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header"><p:outputLabel value="Conteiner"/></f:facet>
+							<h:outputText value="#{movimentacao.conteiner.numero}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header"><p:outputLabel value="Inicio da Movimentação"/></f:facet>
+							<h:outputText value="#{movimentacao.dataHoraInicio}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header"><p:outputLabel value="Fim da Movimentação"/></f:facet>
+							<h:outputText value="#{movimentacao.dataHoraFim}" />
+						</p:column>
+						
+						</p:dataTable>
+						</p:panel>
+	</h:form>
+</h:body>
+</html>

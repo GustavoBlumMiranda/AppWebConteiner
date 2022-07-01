@@ -1,0 +1,19 @@
+public void exibirModal(){
+		Map<String,Object> options = new HashMap<String, Object>();
+        options.put("modal", true);
+        options.put("resizable", false);
+        options.put("width", 900);
+        options.put("height", 500);
+        options.put("contentWidth", 880);
+        options.put("contentHeight", 480);
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("", );
+			RequestContext.getCurrentInstance().openDialog("", options, null);
+			this.();
+			
+			
+		} catch (Exception erro) {
+			System.out.println("Exception: " + erro.getMessage());
+		}	
+	
+	}

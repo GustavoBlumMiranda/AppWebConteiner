@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:opcoes="http://java.sun.com/jsf/composite/composite/opcoes">
+
+	<h:head>
+		<title>Alteração de dados de Conteiner</title>
+		<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+	</h:head>
+
+	<h:body>
+	<h:form>
+	<div>
+			<p:panelGrid columns="2" var="conteiner" value="#{dialogAlterarConteiner.conteiner}">
+			<p:outputLabel value="Cliente:"/>
+			<p:inputText type="text" class="input" value="#{dialogAlterarConteiner.conteiner.cliente}"/>
+			
+			<p:outputLabel value="Identificação Letras:"/>
+         	<p:inputText type="text" name="idLetras" onkeydown="return /[a-z]/i.test(event.key)" maxlength="4" class="input"
+         	value="#{dialogAlterarConteiner.idLetras}" />
+         	
+         	<p:outputLabel value="Identificação Numérica:" />
+          	<p:inputText type="text" name="idNumeros" onkeydown="return /[0-9]/i.test(event.key)" maxlength="7" class="input"
+          	value="#{dialogAlterarConteiner.idNumeros}" />
+          	
+			<p:outputLabel value="Tipo"/>
+                <p:selectOneMenu id="tipoConteiner" value="#{dialogAlterarConteiner.conteiner.tipo}">
+                    <f:selectItem itemLabel="20" itemValue="20"/>
+                    <f:selectItem itemLabel="40" itemValue="40"/>
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Status"/>
+                <p:selectOneMenu id="statusConteiner" value="#{dialogAlterarConteiner.conteiner.status}">
+                    <f:selectItem itemLabel="cheio" itemValue="cheio"/>
+                    <f:selectItem itemLabel="vazio" itemValue="vazio"/>
+                </p:selectOneMenu>
+                
+                 <p:outputLabel value="Categoria"/>
+                <p:selectOneMenu id="categoraConteiner" value="#{dialogAlterarConteiner.conteiner.categoria}">
+                    <f:selectItem itemLabel="Importação" itemValue="importacao"/>
+                    <f:selectItem itemLabel="Exportação" itemValue="exportacao"/>
+                </p:selectOneMenu>
+		</p:panelGrid>
+		
+	</div>
+	<p:spacer width="10" height="10" />
+	<div>
+		<p:commandButton value="Salvar"
+			actionListener="#{dialogAlterarConteiner.atualizar()}"
+			styleClass="ui-priority-primary" />
+			<p:spacer width="10" />
+		<p:commandButton value="Excluir"
+			actionListener="#{dialogAlterarConteiner.excluir()}"
+			styleClass="ui-priority-primary" />
+	</div>
+	</h:form>
+</h:body>
+
+</ui:composition>

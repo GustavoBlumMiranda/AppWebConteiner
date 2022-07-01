@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:opcoes="http://java.sun.com/jsf/composite/composite/opcoes">
+
+	<h:head>
+		<title>Alteração de Movimentação</title>
+		<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+	</h:head>
+<h:body>
+	<h:form>
+		<div>
+			<p:panelGrid columns="2">
+			
+			<p:outputLabel value="Conteiner"/>
+			<p:inputText type="text" class="input" value="#{dialogAlterarMovimentacao.movimentacao.conteiner.numero}"/>
+
+				<p:outputLabel value="Tipo" />
+				<p:selectOneMenu id="tipoConteiner" value="#{dialogAlterarMovimentacao.movimentacao.tipo}">
+					<f:selectItem itemLabel="Embarque" itemValue="embarque" />
+					<f:selectItem itemLabel="Descarga" itemValue="descarga" />
+					<f:selectItem itemLabel="Gate In" itemValue="gateIn" />
+					<f:selectItem itemLabel="Gate Out" itemValue="gateOut" />
+					<f:selectItem itemLabel="Reposicionamento" itemValue="reposicionamento" />
+					<f:selectItem itemLabel="Pesagem" itemValue="pesagem" />
+					<f:selectItem itemLabel="Scanner" itemValue="scanner" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Período do inicio da Movimentação: " />
+				<p:calendar selectOtherMonths="true" navigator="true" locale="pt"
+					pattern="dd/MM/yyyy HH:mm"
+					onkeyup="return mascara(this, event, '99/99/9999 99:99')"
+					maxlength="16" value="#{dialogAlterarMovimentacao.movimentacao.dataHoraInicio}"
+					showOtherMonths="true" size="20" />
+
+				<p:outputLabel value="Período do fim da Movimentação: " />
+				<p:calendar selectOtherMonths="true" navigator="true" locale="pt"
+					pattern="dd/MM/yyyy HH:mm"
+					onkeyup="return mascara(this, event, '99/99/9999 99:99')"
+					maxlength="16" value="#{dialogAlterarMovimentacao.movimentacao.dataHoraFim}"
+					showOtherMonths="true" size="20" />
+
+
+			</p:panelGrid>
+
+		</div>
+		<p:spacer width="10" height="10" />
+	<div>
+		<p:commandButton value="Salvar"
+			actionListener="#{dialogAlterarMovimentacao.atualizar()}"
+			styleClass="ui-priority-primary" />
+			<p:spacer width="10" />
+		<p:commandButton value="Excluir"
+			actionListener="#{dialogAlterarMovimentacao.excluir()}"
+			styleClass="ui-priority-primary" />
+	</div>
+	</h:form>
+</h:body>
+</ui:composition>

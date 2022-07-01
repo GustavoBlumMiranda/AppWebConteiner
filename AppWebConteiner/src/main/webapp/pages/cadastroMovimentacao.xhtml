@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>CadastroMovimentacao</title>
+</h:head>
+<h:body>
+	<h:form>
+	
+	<p:menubar>
+            <p:submenu label="Conteiners"  >
+                <p:menuitem value="Cadastrar"  action="#{controleMovimentacao.exibirCadastroConteiner()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{controleMovimentacao.exibirFiltroConteiner()}"/>
+            </p:submenu>
+            <p:submenu label="Movimentação"  >
+                <p:menuitem value="Cadastrar"  action="#{controleMovimentacao.exibirCadastroMovimentacao()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{controleMovimentacao.exibirFiltroMovimentacao()}"/>
+            </p:submenu>
+            </p:menubar>
+		<div>
+			<p:panelGrid columns="2">
+			
+			<p:outputLabel value="Conteiner"/>
+			<p:inputText type="text" class="input" value="#{controleMovimentacao.codigoConteiner}"/>
+
+				<p:outputLabel value="Tipo" />
+				<p:selectOneMenu id="tipoConteiner" value="#{controleMovimentacao.movimentacao.tipo}">
+					<f:selectItem itemLabel="Embarque" itemValue="embarque" />
+					<f:selectItem itemLabel="Descarga" itemValue="descarga" />
+					<f:selectItem itemLabel="Gate In" itemValue="gateIn" />
+					<f:selectItem itemLabel="Gate Out" itemValue="gateOut" />
+					<f:selectItem itemLabel="Reposicionamento" itemValue="reposicionamento" />
+					<f:selectItem itemLabel="Pesagem" itemValue="pesagem" />
+					<f:selectItem itemLabel="Scanner" itemValue="scanner" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Período do inicio da Movimentação: " />
+				<p:calendar selectOtherMonths="true" navigator="true" locale="pt"
+					pattern="dd/MM/yyyy HH:mm"
+					onkeyup="return mascara(this, event, '99/99/9999 99:99')"
+					maxlength="16" value="#{controleMovimentacao.movimentacao.dataHoraInicio}"
+					showOtherMonths="true" size="20" />
+
+				<p:outputLabel value="Período do fim da Movimentação: " />
+				<p:calendar selectOtherMonths="true" navigator="true" locale="pt"
+					pattern="dd/MM/yyyy HH:mm"
+					onkeyup="return mascara(this, event, '99/99/9999 99:99')"
+					maxlength="16" value="#{controleMovimentacao.movimentacao.dataHoraFim}"
+					showOtherMonths="true" size="20" />
+
+
+			</p:panelGrid>
+
+		</div>
+		<p:commandButton value="Salvar"
+			actionListener="#{controleMovimentacao.salvar()}"
+			styleClass="ui-priority-primary" ajax="true"/>
+	</h:form>
+</h:body>
+</html>

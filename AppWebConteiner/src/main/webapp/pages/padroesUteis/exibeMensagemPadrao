@@ -1,0 +1,12 @@
+addMessage(FacesMessage.SEVERITY_ERROR, "Erro. ", "mensagem");
+			showMessage(FacesMessage.SEVERITY_ERROR, "mensagem");
+
+
+private void showMessage(FacesMessage.Severity severidade, String titulo, String msg) {
+		FacesMessage message = new FacesMessage(severidade, titulo, msg);
+		RequestContext.getCurrentInstance().showMessageInDialog(message);
+	}
+
+	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, summary, detail));
+	}

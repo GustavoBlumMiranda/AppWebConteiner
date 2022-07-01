@@ -1,0 +1,14 @@
+public String fecharTela() {
+		RequestContext.getCurrentInstance().closeDialog();
+		return "SUCESSO";
+	}
+
+public void atualizar(SelectEvent event) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizar",
+				"");
+		metododefiltro();
+		RequestContext.getCurrentInstance().showMessageInDialog(message);
+	}
+	
+	
+	

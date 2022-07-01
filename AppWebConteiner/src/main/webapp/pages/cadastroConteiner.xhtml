@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>CadastroConteiner</title>
+</h:head>
+<h:body>
+	<h:form>
+	<p:menubar>
+            <p:submenu label="Conteiners"  >
+                <p:menuitem value="Cadastrar"  action="#{cadastroConteiner.exibirCadastroConteiner()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{cadastroConteiner.exibirFiltroConteiner()}"/>
+            </p:submenu>
+            <p:submenu label="Movimentação"  >
+                <p:menuitem value="Cadastrar"  action="#{cadastroConteiner.exibirCadastroMovimentacao()}"/>
+                
+                <p:menuitem value="Consultar"  action="#{cadastroConteiner.exibirFiltroMovimentacao()}"/>
+            </p:submenu>
+            </p:menubar>
+		
+	<div>
+			<p:panelGrid columns="2" var="conteiner" value="#{cadastroConteiner.conteiner}">
+			<p:outputLabel value="Cliente:"/>
+			<p:inputText type="text" class="input" value="#{cadastroConteiner.conteiner.cliente}"/>
+			
+			<p:outputLabel value="Identificação Letras:"/>
+         	<p:inputText type="text" name="idLetras" onkeydown="return /[a-z]/i.test(event.key)" maxlength="4" class="input"
+         	value="#{cadastroConteiner.idLetras}" />
+         	
+         	<p:outputLabel value="Identificação Numérica:" />
+          	<p:inputText type="text" name="idNumeros" onkeydown="return /[0-9]/i.test(event.key)" maxlength="7" class="input"
+          	value="#{cadastroConteiner.idNumeros}" />
+          	
+			<p:outputLabel value="Tipo"/>
+                <p:selectOneMenu id="tipoConteiner" value="#{cadastroConteiner.conteiner.tipo}">
+                    <f:selectItem itemLabel="20" itemValue="20"/>
+                    <f:selectItem itemLabel="40" itemValue="40"/>
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Status"/>
+                <p:selectOneMenu id="statusConteiner" value="#{cadastroConteiner.conteiner.status}">
+                    <f:selectItem itemLabel="cheio" itemValue="cheio"/>
+                    <f:selectItem itemLabel="vazio" itemValue="vazio"/>
+                </p:selectOneMenu>
+                
+                 <p:outputLabel value="Categoria"/>
+                <p:selectOneMenu id="categoraConteiner" value="#{cadastroConteiner.conteiner.categoria}">
+                    <f:selectItem itemLabel="Importação" itemValue="importacao"/>
+                    <f:selectItem itemLabel="Exportação" itemValue="exportacao"/>
+                </p:selectOneMenu>
+		</p:panelGrid>
+		
+	</div>
+		<p:commandButton value="Salvar"
+			actionListener="#{cadastroConteiner.salvar()}"
+			styleClass="ui-priority-primary" />
+	</h:form>
+</h:body>
+</html>
